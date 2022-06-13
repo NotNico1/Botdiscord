@@ -3,10 +3,48 @@ const client = new Discord.Client(
     { intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES", "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING", "GUILD_SCHEDULED_EVENTS"] }
 )
 
-client.login(process.env.token)
+client.login(OTg0Mzg0MDE3NTQzNjA2Mjcy.GZJ0Kz.mjrIn7Ok-ssgdJNSx-RfEHg0WizOq6CfLDEyFw)
 
 client.on("ready", () => {
     console.log("Bot ONLINE")
+})
+
+const { DisTube } = require("distube")
+const { SpotifyPlugin } = require("@distube/spotify")
+const { SoundCloudPlugin } = require("@distube/soundcloud")
+
+const distube = new DisTube(client, {
+            youtubeDL: false,
+            plugins: [new  SpotifyPlugin(), new SoundCloudPlugin()],
+            leaveOnEmpty: true,
+            leaveOnStop: true 
+})
+
+client.on("messageCreate", message => {
+       if(message.content.startsWith("play")) {
+        const voiceChannel = message.member.voice.channel
+        if(!voiceChannel) {
+            return message.channel.send("Devi essere in un canale vocale") 
+       }
+
+       const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
+        return message.channel.send("Qualcun'altro sta gia ascoltando della musica") 
+    }
+    
+       let args = message.content.split(/\s+/)
+       let query = args.slice(1).join(" ")
+
+       if (!query) {
+        return message.channel.send("Inserisci la canzone che vuoi ascoltare")
+    }    
+
+    distube.play(voiceChannelBot || voiceChannel, query, {
+        member: message.member,
+        textChannel: message.channel,
+        message: message
+    })
+   }
 })
 
 client.on("messageCreate", (message) => {
@@ -35,6 +73,8 @@ client.on("messageCreate", (message) => {
         console.log("Command !instagram Success Server")
 
     }
+
+    if (message.content == "")
 
     if (message.content == "!ip") {
         console.log("Command eb Success from Client")
