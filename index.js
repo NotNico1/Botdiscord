@@ -17,8 +17,8 @@ client.on("messageCreate", (message) => {
    }
 
    if(message.content == "eb che fai di bello?") 
-    message.channel.send("Sto giocando su eldian se vuoi entrare anche tu fai !ip")
-    
+    message.channel.send("Sto giocando su Eldian se vuoi entrare anche tu fai !ip")
+
 
     if (message.content == "!tiktok") {
         console.log("Command !instagram Success Client")
@@ -40,16 +40,12 @@ client.on("messageCreate", (message) => {
 
     }
 
-    if (message.content == "")
+    if (message.content == "!ip")
+    message.channel.send("IP di eldian: mc.eldian.it")
+     
 
-    if (message.content == "!ip") {
-        console.log("Command eb Success from Client")
-        var embed = new Discord.MessageEmbed()
-            .setTitle("Eldian")
-            .setDescription("IP: mc.eldian.it")
-            .setThumbnail("https://cdn.discordapp.com/attachments/825804924055060480/983051751584333854/Eldian.png")
 
         message.channel.send({ embeds: [embed] })
         console.log("Command !instagram Success Server")
     } 
-})
+)
