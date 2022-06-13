@@ -9,44 +9,6 @@ client.on("ready", () => {
     console.log("Bot ONLINE")
 })
 
-const { DisTube } = require("distube")
-const { SpotifyPlugin } = require("@distube/spotify")
-const { SoundCloudPlugin } = require("@distube/soundcloud")
-
-const distube = new DisTube(client, {
-            youtubeDL: false,
-            plugins: [new  SpotifyPlugin(), new SoundCloudPlugin()],
-            leaveOnEmpty: true,
-            leaveOnStop: true 
-})
-
-client.on("messageCreate", message => {
-       if(message.content.startsWith("play")) {
-        const voiceChannel = message.member.voice.channel
-        if(!voiceChannel) {
-            return message.channel.send("Devi essere in un canale vocale") 
-       }
-
-       const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
-        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
-        return message.channel.send("Qualcun'altro sta gia ascoltando della musica") 
-    }
-    
-       let args = message.content.split(/\s+/)
-       let query = args.slice(1).join(" ")
-
-       if (!query) {
-        return message.channel.send("Inserisci la canzone che vuoi ascoltare")
-    }    
-
-    distube.play(voiceChannelBot || voiceChannel, query, {
-        member: message.member,
-        textChannel: message.channel,
-        message: message
-    })
-   }
-})
-
 client.on("messageCreate", (message) => {
     if (message.content == "!instagram") {
         console.log("Command !instagram Success Client")
