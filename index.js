@@ -18,6 +18,7 @@ client.on("messageCreate", (message) => {
 
    if(message.content == "eb che fai di bello?") 
     message.channel.send("Sto giocando su eldian se vuoi entrare anche tu fai !ip")
+    
 
     if (message.content == "!tiktok") {
         console.log("Command !instagram Success Client")
