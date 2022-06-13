@@ -17,7 +17,7 @@ client.on("messageCreate", (message) => {
    }
 
    if(message.content == "eb che fai di bello?") 
-    message.channel.send("Sto giocando su Eldian se vuoi entrare anche tu fai !ip")
+    message.channel.send("Sto giocando su Eldian e tu?")
 
 
     if (message.content == "!tiktok") {
