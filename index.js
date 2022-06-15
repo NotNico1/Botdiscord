@@ -4,7 +4,6 @@ const client = new Discord.Client(
 )
 
 client.login(process.env.token)
-
 client.on("ready", () => {
     console.log("Bot ONLINE")
 })
@@ -16,6 +15,9 @@ client.on("messageCreate", (message) => {
         console.log("Command !instagram Success Server")
    }
 
+   if(message.content == "eb che fai di bello?") 
+    message.channel.send("Sto giocando su Eldian e tu?")
+
 
     if (message.content == "!tiktok") {
         console.log("Command !instagram Success Client")
@@ -23,17 +25,16 @@ client.on("messageCreate", (message) => {
         console.log("Command !instagram Success Server")
     }
 
-    if (message.content == "eb") {
-    console.log("Command eb Success from Client")
-        message.channel.send("Come posso aiutarti?")
-    console.log("Command eb Success from Server")
-    
-    }
-
     if (message.content == "eb come stai?") {
         console.log("Command eb Success from Client")
         message.channel.send("Bene e tu?")
         console.log("Command !instagram Success Server")
+
+    }
+
+    if (message.content == "!ip")
+    message.channel.send("IP di eldian: mc.eldian.it")
+     
 
 
         message.channel.send({ embeds: [embed] })
